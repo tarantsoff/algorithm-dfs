@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Created by Andrii Tarantsov on 10/5/17.
  */
-public class BFSTest{
+public class BFSTest {
 
     private Node first;
     private Node second;
@@ -19,13 +19,17 @@ public class BFSTest{
     private Node sixth;
     private Node seventh;
 
+    private static HashSet<Node> asNodesSet(Node[] neighbors) {
+        return new HashSet<>(Arrays.asList(neighbors));
+    }
+
     @Test
     public void testSimple() throws Exception {
 
         final Map<Node, Set<Node>> graph = new HashMap<>();
         graph.put(first, asNodesSet(new Node[]{second, third}));
         graph.put(second, asNodesSet(new Node[]{fourth, fifth}));
-        graph.put(fifth, asNodesSet(new Node[] {second, sixth, seventh}));
+        graph.put(fifth, asNodesSet(new Node[]{second, sixth, seventh}));
 
         Assert.fail("The work still in progress");
 
@@ -40,9 +44,5 @@ public class BFSTest{
         fifth = new Node("fifth");
         sixth = new Node("sixth");
         seventh = new Node("seventh");
-    }
-
-    private static HashSet<Node> asNodesSet(Node[] neighbors) {
-        return new HashSet<>(Arrays.asList(neighbors));
     }
 }
