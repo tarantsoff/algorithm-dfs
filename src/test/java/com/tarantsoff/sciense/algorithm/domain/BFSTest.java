@@ -1,5 +1,6 @@
 package com.tarantsoff.sciense.algorithm.domain;
 
+import com.tarantsoff.sciense.algorithm.BFSGraphWalker;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,12 +28,22 @@ public class BFSTest {
     public void testSimple() throws Exception {
 
         final Map<Node, Set<Node>> graph = new HashMap<>();
-        graph.put(first, asNodesSet(new Node[]{second, third}));
-        graph.put(second, asNodesSet(new Node[]{fourth, fifth}));
-        graph.put(fifth, asNodesSet(new Node[]{second, sixth, seventh}));
+        link(graph, first, second, third);
+        link(graph, second, fourth, fifth);
+        link(graph, fifth, sixth, seventh);
+        //
+        BFSGraphWalker walker = new BFSGraphWalker(graph);
+        List<Node> path = walker.findPath(first, seventh);
+        Assert.assertEquals(
+                "Path length from node " + first + " to node " + seventh,
+                4,
+                path.size());
 
-        Assert.fail("The work still in progress");
+    }
 
+    private void link(Map<Node, Set<Node>> graph, Node first, Node... neiboardg) {
+        HashSet<Node> nodes = asNodesSet(neiboardg);
+        graph.put(first, nodes);
     }
 
     @Before
